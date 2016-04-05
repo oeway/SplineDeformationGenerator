@@ -295,15 +295,22 @@ PlugIn
 		int max_scale      = ((Integer) new Integer(args[3])).intValue();
 		double noiseSpline = ((Double) new Double(args[4])).doubleValue();
 		String fn_out      = args[5];
-		String fn_tnf      = "";
+		String fn_tnf      = "";    
+        boolean bUseRndSeed     = false;
+        long rnd_seed           = 0;
 
 		boolean bSaveTransformation = false;
-		if (args.length == 7) 
+		if (args.length >= 7) 
 		{
 			bSaveTransformation = true;
 			fn_tnf = args[6];
 		}
-
+        if (args.length == 8)
+        {
+            bUseRndSeed = true;
+            rnd_seed = ((Long) new Long(args[7])).longValue();
+        }
+        
 		int TRANSFORMATIONSPLINEDEGREE = 3;
 		// Mode = elastic
 		int deformationModelIndex = SplineDeformationGenerator_.MODE_ELASTIC;
@@ -315,6 +322,8 @@ PlugIn
 		IJ.log("Noise Spline           : " + noiseSpline);
 		IJ.log("Output image file      : " + fn_out);
 		IJ.log("Output transf. file    : " + fn_tnf);
+        if (bUseRndSeed)
+            IJ.log("Random seed            : " + rnd_seed);
 
 		// Open source
 		Opener opener = new Opener();
@@ -343,7 +352,10 @@ PlugIn
 						min_scale, max_scale, noiseSpline, TRANSFORMATIONSPLINEDEGREE,
 						0, 0, 0, 0, 0, 0, 0, 0, 0, bSaveTransformation, false, false,
 						fn_out, fn_tnf, output_ip);
-		warp.generateDeformation();
+        if(bUseRndSeed)
+            warp.generateDeformation(rnd_seed);
+        else
+            warp.generateDeformation();
 
 		// Save result as TIFF
 		IJ.saveAsTiff( output_ip, fn_out );               
@@ -371,13 +383,20 @@ PlugIn
 
 		String fn_out      = args[5];
 		String fn_tnf      = "";
+        boolean bUseRndSeed     = false;
+        long rnd_seed           = 0;
 
 		boolean bSaveTransformation = false;
-		if (args.length == 7) 
+		if (args.length >= 7) 
 		{
 			bSaveTransformation = true;
 			fn_tnf = args[6];
 		}
+        if (args.length == 8)
+        {
+            bUseRndSeed = true;
+            rnd_seed = ((Long) new Long(args[7])).longValue();
+        }
 
 		int TRANSFORMATIONSPLINEDEGREE = 3;
 		// Mode = fisheye
@@ -419,7 +438,10 @@ PlugIn
 						num_of_magnifiers, magnifier_power, magnifier_size,
 						0, 0, 0, 0, 0, 0, bSaveTransformation, false, false,
 						fn_out, fn_tnf, output_ip);
-		warp.generateDeformation();
+        if(bUseRndSeed)
+            warp.generateDeformation(rnd_seed);
+        else
+            warp.generateDeformation();
 
 		// Save result as TIFF
 		IJ.saveAsTiff( output_ip, fn_out );                
@@ -445,13 +467,20 @@ PlugIn
 		double noise_shift = ((Double) new Double(args[3])).doubleValue();
 		String fn_out      = args[4];
 		String fn_tnf      = "";
+        boolean bUseRndSeed     = false;
+        long rnd_seed           = 0;
 
 		boolean bSaveTransformation = false;
-		if (args.length == 6) 
+		if (args.length >= 6) 
 		{
 			bSaveTransformation = true;
 			fn_tnf = args[5];
 		}
+        if (args.length == 7)
+        {
+            bUseRndSeed = true;
+            rnd_seed = ((Long) new Long(args[6])).longValue();
+        }
 
 		int TRANSFORMATIONSPLINEDEGREE = 3;
 
@@ -492,7 +521,10 @@ PlugIn
 						0, 0, 0, TRANSFORMATIONSPLINEDEGREE,
 						0, 0, 0, noise_scale, noise_shift, 0, 0, 0, 0, bSaveTransformation, false, false,
 						fn_out, fn_tnf, output_ip);
-		warp.generateDeformation();
+        if(bUseRndSeed)
+            warp.generateDeformation(rnd_seed);
+        else
+            warp.generateDeformation();
 
 		// Save result as TIFF
 		IJ.saveAsTiff( output_ip, fn_out );              
@@ -518,13 +550,20 @@ PlugIn
 		double noise_K2   = ((Double) new Double(args[3])).doubleValue();
 		String fn_out     = args[4];
 		String fn_tnf     = "";
+        boolean bUseRndSeed     = false;
+        long rnd_seed           = 0;
 
 		boolean bSaveTransformation = false;
-		if (args.length == 6) 
+		if (args.length >= 6) 
 		{
 			bSaveTransformation = true;
 			fn_tnf = args[5];
 		}
+        if (args.length == 7)
+        {
+            bUseRndSeed = true;
+            rnd_seed = ((Long) new Long(args[6])).longValue();
+        }
 
 		int TRANSFORMATIONSPLINEDEGREE = 3;
 
@@ -567,7 +606,10 @@ PlugIn
 						0, 0, 0, 0, 0, noise_K1, noise_K2,
 						0, 0, bSaveTransformation, false, false,
 						fn_out, fn_tnf, output_ip);
-		warp.generateDeformation();
+        if(bUseRndSeed)
+            warp.generateDeformation(rnd_seed);
+        else
+            warp.generateDeformation();
 
 		// Save result as TIFF
 		IJ.saveAsTiff( output_ip, fn_out );              
@@ -594,14 +636,21 @@ PlugIn
 		double max_shift        = ((Double) new Double(args[3])).doubleValue();
 		String fn_out           = args[4];
 		String fn_tnf           = "";
+        boolean bUseRndSeed     = false;
+        long rnd_seed           = 0;
 
 		boolean bSaveTransformation = false;
-		if (args.length == 6) 
+		if (args.length >= 6) 
 		{
 			bSaveTransformation = true;
 			fn_tnf = args[5];
 		}
-
+        if (args.length == 7)
+        {
+            bUseRndSeed = true;
+            rnd_seed = ((Long) new Long(args[6])).longValue();
+        }
+        
 		int TRANSFORMATIONSPLINEDEGREE = 3;
 
 		// Mode = 2D gels
@@ -644,7 +693,10 @@ PlugIn
 						length_reduction, max_shift, 
 						bSaveTransformation, false, false,
 						fn_out, fn_tnf, output_ip);
-		warp.generateDeformation();
+        if(bUseRndSeed)
+            warp.generateDeformation(rnd_seed);
+        else
+            warp.generateDeformation();
 
 		// Save result as TIFF
 		IJ.saveAsTiff( output_ip, fn_out );               
@@ -2092,9 +2144,20 @@ PlugIn
 		/**
 		 * Generate deformation method
 		 */
-		public void generateDeformation () 
+        public void generateDeformation()
+        {
+            Random rnd_generator=new Random();
+            generateDeformation_(rnd_generator);
+        }
+        
+        public void generateDeformation(long rnd_seed)
+        {
+            Random rnd_generator=new Random(rnd_seed);
+            generateDeformation_(rnd_generator);
+        }
+
+		public void generateDeformation_(Random rnd_generator)
 		{
-			Random rnd_generator=new Random();
 			if (mode == SplineDeformationGenerator_.MODE_ELASTIC) 
 			{
 				// Elastic splines ==========================================
